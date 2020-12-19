@@ -1,7 +1,4 @@
 ﻿using CV19.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CV19.ViewModels
 {
@@ -10,7 +7,7 @@ namespace CV19.ViewModels
         #region Заголовок окна
         private string _Title = "Анализ статистики" ;
         /// <summary>
-        /// Заголовок окна
+        /// Title : string - Заголовок окна
         /// </summary>
         public string Title
         {
@@ -27,6 +24,17 @@ namespace CV19.ViewModels
         }
         #endregion
 
-
+        #region Статус
+        private string _Status = "Готово";
+        /// <summary>
+        /// Status : string - Статус
+        /// </summary>
+        public string Status
+        {
+            get => _Status;
+            
+            set => Set(ref _Status, value);
+        }
+        #endregion
     }
 }
