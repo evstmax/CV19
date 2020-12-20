@@ -5,7 +5,7 @@ namespace CV19.ViewModels
     internal class MainWindowViewModel : ViewModel
     {
         #region Заголовок окна
-        private string _Title = "Анализ статистики" ;
+        private string _Title = "Анализ статистики CV19" ;
         /// <summary>
         /// Title : string - Заголовок окна
         /// </summary>
@@ -14,11 +14,11 @@ namespace CV19.ViewModels
             get => _Title;
             //set
             //{
-            //    //if (Equals(_Title, value)) return; // но у нас есть метод Set
-            //    //_Title = value;
-            //    //OnPropertyChanged();
+            //    if (Equals(_Title, value)) return ; // но у нас есть метод Set
+            //    _Title = value;
+            //    OnPropertyChanged(); // вызываем метод класса ИЗДАТЕЛЯ  и он в свою очередь через событие дергает подписчиков
 
-            //    //Set(ref _Title, value); // и можно написать так 
+            //    Set(ref _Title, value); // и можно написать так 
             //}
             set => Set(ref _Title, value);
         }

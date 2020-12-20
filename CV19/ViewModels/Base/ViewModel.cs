@@ -9,7 +9,7 @@ namespace CV19.ViewModels.Base
     internal abstract class ViewModel : INotifyPropertyChanged, IDisposable
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
+        
 
 
         protected virtual void OnPropertyChanged([CallerMemberName] string PropertyName = null)
