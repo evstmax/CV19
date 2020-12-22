@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:CV19.ViewModels"
+        xmlns:cmd="clr-namespace:CV19.Ifrastructure.Commands"
         xmlns:l="clr-namespace:CV19"
+        xmlns:base="clr-namespace:CV19.ViewModels.Base"
         Title="{Binding Title}" 
         Height="450" Width="800">
     <Window.DataContext>
@@ -13,7 +15,12 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
-                <MenuItem Header="Выход" Command="{Binding CloseApplicationCommand}"></MenuItem>
+                <!--<MenuItem Header="Выход" Command="{Binding CloseApplicationCommand}"></MenuItem>-->
+                <MenuItem Header="Выход">
+                    <MenuItem.Command>
+                        <cmd:CloseApplicationCommand/>
+                    </MenuItem.Command>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Помощь">
                 <MenuItem Header="О программе"></MenuItem>
@@ -44,11 +51,16 @@
                                StrokeThickness="3"
                                RadiusX="5"
                                RadiusY="7"/>
-                    <Ellipse Grid.Column="1"
+                    <Ellipse Grid.Column="1" 
                               Grid.Row="0" 
                                Margin="5,7,5,7"
                                Fill="Black" Stroke="Yellow"
-                               StrokeThickness="3"/>
+                               StrokeThickness="3">
+                        <Ellipse.InputBindings>
+                            <MouseBinding Command="{Binding CloseApplicationCommand}" MouseAction="MiddleClick"/>
+                        </Ellipse.InputBindings>
+                    </Ellipse>
+
                     <GridSplitter Grid.Column="0" Grid.Row="1" Grid.RowSpan="1"
                                   HorizontalAlignment="Right"
                                   Width="4"></GridSplitter>
