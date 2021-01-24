@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using CV19.Ifrastructure.Commands;
 using CV19.Models;
+using CV19.Models.Decanat;
 using CV19.ViewModels.Base;
 
 namespace CV19.ViewModels
@@ -22,10 +26,14 @@ namespace CV19.ViewModels
             set => Set(ref _TestDataPoints, value);
         }
 
+        public ObservableCollection<Group> Groups { get; }
+
         #endregion
 
+
+
         #region Заголовок окна
-        private string _Title = "Анализ статистики CV19" ;
+        private string _Title = "Анализ статистики CV19";
         /// <summary>
         /// Title : string - Заголовок окна
         /// </summary>
@@ -52,10 +60,13 @@ namespace CV19.ViewModels
         public string Status
         {
             get => _Status;
-            
+
             set => Set(ref _Status, value);
         }
         #endregion
+
+
+        /* --------------------------------------------------------------------------------------------------*/
 
         #region Команды
 
@@ -76,27 +87,53 @@ namespace CV19.ViewModels
 
         #endregion
 
+        /* --------------------------------------------------------------------------------------------------*/
 
         public MainWindowViewModel()
         {
             #region Команды
 
-        CloseApplicationCommand  = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+            CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
 
-        #endregion
+            #endregion
 
 
             var data_points = new List<DataPoint>((int)(360 / 0.1));
-        for (var x = 0d; x <= 360; x += 0.1)
-        {
-            const double to_rad = Math.PI / 180;
-            var y = Math.Exp(x * to_rad);
-           data_points.Add(new DataPoint {XValue = x, YValue = y}); 
+            for (var x = 0d; x <= 360; x += 0.1)
+            {
+                const double to_rad = Math.PI / 180;
+                var y = Math.Exp(x * to_rad);
+                data_points.Add(new DataPoint { XValue = x, YValue = y });
+            }
+
+            TestDataPoints = data_points;
+
+
+
+
+            var student_index = 1;
+            var students = Enumerable.Range(1, 10).Select(i => new Student
+                {
+                    Name = $"Name {student_index}",
+                    Surname = $"Surname {student_index}",
+                    Patronymic = $"Patronymic {student_index++}",
+                    Birthday = DateTime.Now,
+                    Raiting = 0
+                }
+            );
+
+
+
+            var groups = Enumerable.Range(1, 20).Select(i => new Group
+            {
+                Name = $"Группа {i}",
+                Students = new ObservableCollection<Student>(students)
+            });
+            Groups = new ObservableCollection<Group>(groups);
         }
 
-        TestDataPoints = data_points;
-        }
-}
+        /* --------------------------------------------------------------------------------------------------*/
+    }
 
 
 }

@@ -96,6 +96,21 @@
 
                 </oxy:Plot>
             </TabItem>
+            <TabItem Header="Студенты">
+              <Grid>
+                  <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="250"/>
+                      <ColumnDefinition />
+                  </Grid.ColumnDefinitions>
+                  <GroupBox Header="Группы" Grid.Column="0">
+                      <ListBox ItemsSource="{Binding Groups}" DisplayMemberPath="Name"></ListBox>
+                  </GroupBox>
+                  <GroupBox Header="Студенты" Grid.Column="1">
+
+                  </GroupBox>
+              </Grid>
+
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>
