@@ -90,7 +90,7 @@ namespace CV19.ViewModels
         for (var x = 0d; x <= 360; x += 0.1)
         {
             const double to_rad = Math.PI / 180;
-            var y = Math.Cos(x * to_rad);
+            var y = Math.Exp(x * to_rad);
            data_points.Add(new DataPoint {XValue = x, YValue = y}); 
         }
 
