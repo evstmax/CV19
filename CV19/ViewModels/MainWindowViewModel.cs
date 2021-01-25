@@ -14,6 +14,22 @@ namespace CV19.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
+
+
+        #region SelectedGroup : TYPE - DESCRIPTION
+
+        /// <summary>DESCRIPTION</summary>
+        private Group _SelectedGroup;
+
+        /// <summary>DESCRIPTION</summary>
+        public Group SelectedGroup
+        {
+            get => _SelectedGroup;
+            set => Set(ref _SelectedGroup, value);
+        }
+
+        #endregion
+
         #region TestDataPoints : IEnumerable<DataPoint> - Тестовый набор данных для визуализации графиков
 
         /// <summary>Тестовый набор данных для визуализации графиков</summary>
@@ -25,10 +41,10 @@ namespace CV19.ViewModels
             get => _TestDataPoints;
             set => Set(ref _TestDataPoints, value);
         }
-
+        #endregion
         public ObservableCollection<Group> Groups { get; }
 
-        #endregion
+        
 
 
 
@@ -118,7 +134,7 @@ namespace CV19.ViewModels
                     Surname = $"Surname {student_index}",
                     Patronymic = $"Patronymic {student_index++}",
                     Birthday = DateTime.Now,
-                    Raiting = 0
+                    Rating = 0
                 }
             );
 

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:vm="clr-namespace:CV19.ViewModels"
+        xmlns:decanat="clr-namespace:CV19.Models.Decanat"
         xmlns:cmd="clr-namespace:CV19.Ifrastructure.Commands"
         xmlns:l="clr-namespace:CV19"
         xmlns:base="clr-namespace:CV19.ViewModels.Base"
@@ -103,9 +104,39 @@
                       <ColumnDefinition />
                   </Grid.ColumnDefinitions>
                   <GroupBox Header="Группы" Grid.Column="0">
-                      <ListBox ItemsSource="{Binding Groups}" DisplayMemberPath="Name"></ListBox>
+                      <ListBox ItemsSource="{Binding Groups}" 
+                               SelectedIndex="0"
+                               DisplayMemberPath="Name"
+                               SelectedItem="{Binding SelectedGroup}"/>
                   </GroupBox>
-                  <GroupBox Header="Студенты" Grid.Column="1">
+                  <GroupBox Grid.Column="1" Header="{Binding SelectedGroup.Name,  FallbackValue='Студенты', TargetNullValue='Группа не выбрана'}"  >
+                        <DataGrid ItemsSource="{Binding SelectedGroup.Students}" 
+                                AutoGenerateColumns="False" 
+                                IsReadOnly="True"
+                                HorizontalGridLinesBrush="{x:Null}"
+                                GridLinesVisibility="Vertical"
+                                VerticalGridLinesBrush="DarkGray"
+                                AlternatingRowBackground="LightGray">
+                            <!--HorizontalGridLinesBrush="Transparent"-->
+                            <!--HorizontalGridLinesBrush="{x:Null}-->
+                            <DataGrid.Columns>
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding Name}" Width="Auto"/>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding Surname}"/>
+                            <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}"/>
+                                <DataGridTemplateColumn Header="Дата рождения">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate DataType="decanat:Student">
+                                            <DatePicker SelectedDate="{Binding Birthday}"></DatePicker>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            <!--<DataGridTextColumn Header="Дата рождения" Binding="{Binding Birthday, StringFormat=dd.MM.yyyy}"/>-->
+                            <DataGridTextColumn Header="Рейтинг" Binding="{Binding Rating}"/>
+                            <DataGridTextColumn Header="Группа" Binding="{Binding DataContext.SelectedGroup.Name, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                            <DataGridTextColumn Header="Заметки" Binding="{Binding Description}" Width='*'/>
+
+                            </DataGrid.Columns>
+                      </DataGrid>
 
                   </GroupBox>
               </Grid>
