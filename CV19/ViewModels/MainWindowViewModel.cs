@@ -14,9 +14,23 @@ namespace CV19.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
+        public object[] CompositeCollection { get; }
 
+        #region SelectedCompositeValue : object - Выбранный непонятный элемент
 
-        #region SelectedGroup : TYPE - DESCRIPTION
+        /// <summary>Выбранный непонятный элемент</summary>
+        private object _SelectedCompositeValue;
+
+        /// <summary>Выбранный непонятный элемент</summary>
+        public object SelectedCompositeValue
+        {
+            get => _SelectedCompositeValue;
+            set => Set(ref _SelectedCompositeValue, value);
+        }
+
+        #endregion
+
+        #region SelectedGroup : Выбранная группа
 
         /// <summary>DESCRIPTION</summary>
         private Group _SelectedGroup;
@@ -146,9 +160,25 @@ namespace CV19.ViewModels
                 Students = new ObservableCollection<Student>(students)
             });
             Groups = new ObservableCollection<Group>(groups);
+
+
+            var data_list = new List<object>();
+
+            data_list.Add("Hello Word!");
+            data_list.Add(42);
+            var group = Groups[1];
+            data_list.Add(group);
+            data_list.Add(group.Students[0]);
+
+            CompositeCollection = data_list.ToArray();
+
+
         }
 
         /* --------------------------------------------------------------------------------------------------*/
+
+
+
     }
 
 
