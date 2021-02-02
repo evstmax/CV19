@@ -5,24 +5,11 @@
              StartupUri="Views\Windows\MainWindow.xaml">
     <Application.Resources>
 
-        <Style x:Key="BtnBase" TargetType="ButtonBase" >
-            <Setter Property="Background" Value="White"/>
-        </Style>
-
-
-
-
-        <Style TargetType="Button" BasedOn="{StaticResource BtnBase}">
-        </Style>
-
-        <Style x:Key="PrimaryBtn" TargetType="Button" BasedOn="{StaticResource BtnBase}">
-            <Setter Property="FontWeight" Value="Bold"></Setter>
-        </Style>
-
-        <Style x:Key="DangerBtn" TargetType="Button" BasedOn="{StaticResource BtnBase}">
-            <Setter Property="Background" Value="Red"></Setter>
-            <Setter Property="Foreground" Value="White"></Setter>
-        </Style>
+       <ResourceDictionary>
+           <ResourceDictionary.MergedDictionaries>
+               <ResourceDictionary Source="Resources/Styles/Buttons.xaml"></ResourceDictionary>
+           </ResourceDictionary.MergedDictionaries>
+       </ResourceDictionary>
          
     </Application.Resources>
 </Application>
