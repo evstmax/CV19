@@ -120,7 +120,14 @@
                             </TextBlock>
                         </GroupBox.Header>
                         <GroupBox.Resources>
-                            <DataTemplate DataType="{x:Type decanat:Group}">
+
+                            <ResourceDictionary>
+                                <ResourceDictionary.MergedDictionaries>
+                                    <ResourceDictionary Source="../../Resources/DataTemplates/CompositeListItemsDataTemplates.xaml"></ResourceDictionary>
+                                </ResourceDictionary.MergedDictionaries>
+                            </ResourceDictionary>
+
+                            <!--<DataTemplate DataType="{x:Type decanat:Group}">
                                 <TextBlock Text="{Binding Name, StringFormat=Группа {0}}"></TextBlock>
                             </DataTemplate>
                             <DataTemplate DataType="{x:Type decanat:Student}">
@@ -135,7 +142,7 @@
                                 <TextBlock>
                                     <Run>Число:</Run> <TextBlock Text="{Binding}"></TextBlock>
                                 </TextBlock>
-                            </DataTemplate>
+                            </DataTemplate>-->
                         </GroupBox.Resources>
                         <ListBox ItemsSource="{Binding CompositeCollection}" SelectedItem="{Binding SelectedCompositeValue}" SelectionChanged="ListBox_SelectionChanged" ></ListBox>
                     </GroupBox>
@@ -146,7 +153,13 @@
                             <TextBlock Text="Выбранный элемент"></TextBlock>
                         </GroupBox.Header>
                         <GroupBox.Resources>
-                            <DataTemplate DataType="{x:Type decanat:Group}">
+
+                            <ResourceDictionary>
+                                <ResourceDictionary.MergedDictionaries>
+                                    <ResourceDictionary Source="../../Resources/DataTemplates/CompositeItemsControlDataTemplates.xaml"></ResourceDictionary>
+                                </ResourceDictionary.MergedDictionaries>
+                            </ResourceDictionary>
+                            <!--<DataTemplate DataType="{x:Type decanat:Group}">
                                 <TextBlock Text="{Binding Name, StringFormat=Группа {0}}"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
@@ -177,7 +190,7 @@
                                 >
                                 <Run>Число:</Run> <TextBlock Text="{Binding}"></TextBlock>
                             </TextBlock>
-                            </DataTemplate>
+                            </DataTemplate>-->
                         </GroupBox.Resources>
 
                         <ContentControl Content="{Binding SelectedCompositeValue}"></ContentControl>
