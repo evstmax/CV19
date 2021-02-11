@@ -62,7 +62,8 @@
                         <RowDefinition Height="114*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="335*"/>
+                        <ColumnDefinition Width="285*"/>
+                        <ColumnDefinition Width="50*"/>
                         <ColumnDefinition Width="459*"/>
                     </Grid.ColumnDefinitions>
                     <Rectangle Grid.Column="0" Grid.Row="0" 
@@ -70,8 +71,8 @@
                                Fill="Blue" Stroke="Red"
                                StrokeThickness="3"
                                RadiusX="5"
-                               RadiusY="7"/>
-                    <Ellipse Grid.Column="1" 
+                               RadiusY="7" Grid.ColumnSpan="2"/>
+                    <Ellipse Grid.Column="2" 
                               Grid.Row="0" 
                                Margin="5,7,5,7"
                                Fill="Black" Stroke="Yellow"
@@ -81,9 +82,9 @@
                         </Ellipse.InputBindings>
                     </Ellipse>
 
-                    <GridSplitter Grid.Column="0" Grid.Row="1" Grid.RowSpan="1"
-                                  HorizontalAlignment="Right"
-                                  Width="4"></GridSplitter>
+                    <GridSplitter Grid.Column="1" Grid.Row="1" Grid.RowSpan="1"
+                                  HorizontalAlignment="Left"
+                                  Width="4" Margin="46,0,0,0"></GridSplitter>
                 </Grid>
             </TabItem>
             <TabItem Header="График">
@@ -224,10 +225,10 @@
                                         <Setter Property="Background" Value="White"></Setter>
                                     </Style>
                                 </UniformGrid.Resources>
-                                <Button Content="Добавить" Style="{StaticResource PrimaryBtn}" Command="{Binding CreateGroupCommand}"></Button>
+                                <Button Content="Добавить" Style="{StaticResource CheckButtonStyle}" Command="{Binding CreateGroupCommand}"/>
                                 <!--<Button Content="Добавить" Style="{StaticResource ButtonStyle}" Command="{Binding CreateGroupCommand}"></Button>-->
                                 <!--<Button Content="Добавить" Margin="3,0" Padding="3,5" Background="White" Command="{Binding CreateGroupCommand}"></Button>-->
-                                <Button Content="Удалить" Style="{StaticResource DangerBtn}" Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}"></Button>
+                                <Button Content="Удалить" Style="{StaticResource RemoveButtonStyle}" Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}"></Button>
                                 <!--<Button Content="Удалить" Style="{StaticResource ButtonStyle}" Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}"></Button>-->
                                 <!--<Button Content="Удалить" Margin="3,0" Padding="3,5" Background="White" Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}"></Button>-->
                             </UniformGrid>
@@ -280,6 +281,16 @@
                         </DataGrid>
                     </GroupBox>
                 </Grid>
+            </TabItem>
+            <TabItem Header="Вкладка 2">
+                <Button VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Content="ПРИВЕТ"
+                        Padding="14,5"
+                        Margin="30,100,5,5"
+                        Style="{StaticResource CheckButtonStyle}"
+                        Width="110"/>
+
             </TabItem>
         </TabControl>
     </DockPanel>
