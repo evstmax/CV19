@@ -47,48 +47,8 @@
             </StatusBarItem>
         </StatusBar>
         <TabControl>
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <!--<Image Source=""></Image>-->
-                        <fa:ImageAwesome Icon="Regular_File" Height="13" Margin="0,0,5,0" Foreground="Red"/>
-                        <TextBlock Text="Вкладка 1"></TextBlock>
 
-                    </StackPanel>
-                </TabItem.Header>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="151*"/>
-                        <RowDefinition Height="114*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="285*"/>
-                        <ColumnDefinition Width="12*"/>
-                        <ColumnDefinition Width="38*"/>
-                        <ColumnDefinition Width="459*"/>
-                    </Grid.ColumnDefinitions>
-                    <Rectangle Grid.Column="0" Grid.Row="0" 
-                               Margin="5,7,5,7"
-                               Fill="Blue" Stroke="Red"
-                               StrokeThickness="3"
-                               RadiusX="5"
-                               RadiusY="7" Grid.ColumnSpan="3"/>
-                    <Ellipse Grid.Column="3" 
-                              Grid.Row="0" 
-                               Margin="5,7,5,7"
-                               Fill="Black" Stroke="Yellow"
-                               StrokeThickness="3">
-                        <Ellipse.InputBindings>
-                            <MouseBinding Command="{Binding CloseApplicationCommand}" MouseAction="MiddleClick"/>
-                        </Ellipse.InputBindings>
-                    </Ellipse>
-
-                    <GridSplitter Grid.Column="2" Grid.Row="1" Grid.RowSpan="1"
-                                  HorizontalAlignment="Left"
-                                  Width="4" Margin="34,0,0,0"></GridSplitter>
-                </Grid>
-            </TabItem>
-            <TabItem Header="График">
+            <TabItem Header="График" Visibility="Collapsed">
                 <oxy:Plot>
                     <oxy:Plot.Axes>
                         <oxy:LinearAxis Position="Left"></oxy:LinearAxis>
@@ -98,114 +58,9 @@
                                     ItemsSource="{Binding TestDataPoints}"
                                     DataFieldX="XValue"
                                     DataFieldY="YValue"/>
-
                 </oxy:Plot>
-
-
-
-
             </TabItem>
-            <TabItem Header="Разнородные данные" Margin="-2,-2,-2,0" Height="20" VerticalAlignment="Top">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="96"></ColumnDefinition>
-                        <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="134"/>
-                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                        <ColumnDefinition Width="31*"/>
-                    </Grid.ColumnDefinitions>
 
-                    <GroupBox Grid.ColumnSpan="3">
-                        <GroupBox.Header>
-                            <TextBlock>
-                                <TextBlock.Text>Элементы</TextBlock.Text>
-                            </TextBlock>
-                        </GroupBox.Header>
-                        <GroupBox.Resources>
-
-                            <ResourceDictionary>
-                                <ResourceDictionary.MergedDictionaries>
-                                    <ResourceDictionary Source="../../Resources/DataTemplates/CompositeListItemsDataTemplates.xaml"></ResourceDictionary>
-                                </ResourceDictionary.MergedDictionaries>
-                            </ResourceDictionary>
-
-                            <!--<DataTemplate DataType="{x:Type decanat:Group}">
-                                <TextBlock Text="{Binding Name, StringFormat=Группа {0}}"></TextBlock>
-                            </DataTemplate>
-                            <DataTemplate DataType="{x:Type decanat:Student}">
-                                <TextBlock Text="{Binding Name, StringFormat=Студент {0}}"></TextBlock>
-                            </DataTemplate>
-                            <DataTemplate DataType="{x:Type sys:String}">
-                                <TextBlock>
-                                    <Run Foreground="Red">Строка:</Run> <TextBlock Text="{Binding}"></TextBlock>
-                                </TextBlock>
-                            </DataTemplate>
-                            <DataTemplate DataType="{x:Type sys:Int32}">
-                                <TextBlock>
-                                    <Run>Число:</Run> <TextBlock Text="{Binding}"></TextBlock>
-                                </TextBlock>
-                            </DataTemplate>-->
-                        </GroupBox.Resources>
-                        <ListBox ItemsSource="{Binding CompositeCollection}" SelectedItem="{Binding SelectedCompositeValue}" SelectionChanged="ListBox_SelectionChanged" ></ListBox>
-                    </GroupBox>
-
-
-                    <GroupBox Grid.Column="3" Grid.ColumnSpan="2">
-                        <GroupBox.Header>
-                            <TextBlock Text="Выбранный элемент"></TextBlock>
-                        </GroupBox.Header>
-                        <GroupBox.Resources>
-
-                            <ResourceDictionary>
-                                <ResourceDictionary.MergedDictionaries>
-                                    <ResourceDictionary Source="../../Resources/DataTemplates/CompositeItemsControlDataTemplates.xaml"></ResourceDictionary>
-                                </ResourceDictionary.MergedDictionaries>
-                            </ResourceDictionary>
-                            <!--<DataTemplate DataType="{x:Type decanat:Group}">
-                                <TextBlock Text="{Binding Name, StringFormat=Группа {0}}"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       FontSize="30"
-                                       ></TextBlock>
-                            </DataTemplate>
-                            <DataTemplate DataType="{x:Type decanat:Student}">
-                                <TextBlock Text="{Binding Name, StringFormat=Студент {0}}"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       FontSize="30"
-                                       ></TextBlock>
-                            </DataTemplate>
-                            <DataTemplate DataType="{x:Type sys:String}">
-                                <TextBlock
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                FontSize="30"
-                                >
-                                <Run Foreground="Red">Строка:</Run> <TextBlock Text="{Binding}"></TextBlock>
-                            </TextBlock>
-                            </DataTemplate>
-                            <DataTemplate DataType="{x:Type sys:Int32}">
-                                <TextBlock
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                FontSize="30"
-                                >
-                                <Run>Число:</Run> <TextBlock Text="{Binding}"></TextBlock>
-                            </TextBlock>
-                            </DataTemplate>-->
-                        </GroupBox.Resources>
-
-                        <ContentControl Content="{Binding SelectedCompositeValue}"></ContentControl>
-
-                    </GroupBox>
-                </Grid>
-
-
-
-
-
-
-            </TabItem>
 
             <TabItem Header="Студенты">
                 <Grid>
@@ -298,16 +153,6 @@
                         </DataGrid>
                     </GroupBox>
                 </Grid>
-            </TabItem>
-            <TabItem Header="Вкладка 2">
-                <Button VerticalAlignment="Top"
-                        HorizontalAlignment="Left"
-                        Content="ПРИВЕТ"
-                        Padding="14,5"
-                        Margin="30,100,5,5"
-                        Style="{StaticResource CheckButtonStyle}"
-                        Width="110"/>
-
             </TabItem>
         </TabControl>
     </DockPanel>
