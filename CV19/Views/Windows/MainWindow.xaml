@@ -11,6 +11,7 @@
         xmlns:base="clr-namespace:CV19.ViewModels.Base"
         xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+        xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         Title="{Binding Title}" 
         Height="450" Width="800">
     <Window.InputBindings>
@@ -41,7 +42,7 @@
         </StatusBar>
         <TabControl>
 
-           <TabItem Header="Тестирование виртуализации">
+           <TabItem Header="Тестирование виртуализации" Visibility="Collapsed" >
                <Grid>
                    <TextBlock Text="{Binding Source={x:Static l:App.InDesignMode}}"></TextBlock>
                     <ListBox HorizontalAlignment="Left" 
@@ -78,7 +79,7 @@
                    </ListBox>
                 </Grid>
            </TabItem>
-            <TabItem Header="Студенты">
+            <TabItem Header="Студенты" IsSelected="True">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="250"/>
@@ -90,8 +91,14 @@
                                 <CollectionViewSource x:Key="GroupsCollection" 
                                                       x:Name="GroupsCollection"
                                                       Source="{Binding Groups}"
-                                                      Filter="GroupsCollectionFilter"
-                                                      ></CollectionViewSource>
+                                                      Filter="GroupsCollectionFilter">
+                                    <CollectionViewSource.GroupDescriptions>
+                                        <PropertyGroupDescription PropertyName="Students.Count"/>
+                                    </CollectionViewSource.GroupDescriptions>
+                                    <CollectionViewSource.SortDescriptions>
+                                        <cm:SortDescription PropertyName="Name" Direction="Descending"/>
+                                    </CollectionViewSource.SortDescriptions>
+                                </CollectionViewSource>
                             </DockPanel.Resources>
                             <DockPanel DockPanel.Dock="Top" Margin="0,3,0,3">
                                 <fa:ImageAwesome Height="12" Icon="Solid_Search" Margin="3,0"/>
@@ -139,21 +146,16 @@
                                         </DataTemplate.Triggers>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
-
                             </ListBox>
-
                         </DockPanel>
-
-
-
                     </GroupBox>
                     <GroupBox Grid.Column="1" Header="{Binding SelectedGroup.Name,  FallbackValue='Студенты', TargetNullValue='Группа не выбрана'}"  >
                         <DockPanel>
                             <DockPanel DockPanel.Dock="Top" Margin="0,3,0,3">
                                 <fa:ImageAwesome Height="12" Icon="Solid_Search" Margin="3,0"/>
-                                <TextBox/>
+                                <TextBox Text="{Binding StudentFilterText, UpdateSourceTrigger=PropertyChanged}"  />
                             </DockPanel>
-                            <DataGrid ItemsSource="{Binding SelectedGroup.Students}" 
+                            <DataGrid ItemsSource="{Binding SelectedGroupStudents}" 
                                       AutoGenerateColumns="False" 
                                       CanUserAddRows="False"
                                       HorizontalGridLinesBrush="{x:Null}"
@@ -162,6 +164,9 @@
                                       AlternatingRowBackground="LightGray">
                                 <!--HorizontalGridLinesBrush="Transparent"-->
                                 <!--HorizontalGridLinesBrush="{x:Null}-->
+                                <!--<DataGrid.GroupStyle>
+                                    <GroupStyle></GroupStyle>
+                                </DataGrid.GroupStyle>-->
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}" Width="Auto" IsReadOnly="True"/>
                                     <DataGridTextColumn Header="Имя" Binding="{Binding Name}" IsReadOnly="True"/>
