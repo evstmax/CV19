@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using CV19.ViewModels.Base;
 
@@ -17,6 +19,9 @@ namespace CV19.ViewModels
 
 
         public FileViewModel(string Path) =>_FileInfo = new FileInfo(Path);
-       
+
+
+
+
     }
 }

@@ -32,9 +32,8 @@ namespace CV19.ViewModels
                 return Enumerable.Empty<DirectoryViewModel>();
             }
 
-        } 
-        
-        
+        }
+
 
 
         public IEnumerable<FileViewModel> Files
@@ -43,7 +42,7 @@ namespace CV19.ViewModels
             {
                 try
                 {
-                    var files = _DirectoryInfo
+                    return _DirectoryInfo
                         .EnumerateFiles()
                         .Select(file => new FileViewModel(file.FullName));
                 }
@@ -55,8 +54,27 @@ namespace CV19.ViewModels
                 return Enumerable.Empty<FileViewModel>();
             }
         }
-        
- 
+
+        public IEnumerable<object> DirectoryItems
+
+        {
+            get
+            {
+                try
+                {
+                    return SubDirectories.Cast<object>().Concat(Files);
+                }
+                catch (UnauthorizedAccessException e)
+                {
+                    Debug.WriteLine(e.ToString());
+                }
+
+                return Enumerable.Empty<FileViewModel>();
+            }
+        }
+
+
+
 
 
 
@@ -64,8 +82,6 @@ namespace CV19.ViewModels
 
         public string Path => _DirectoryInfo.FullName;
         public DateTime CreationTime => _DirectoryInfo.CreationTime;
-
-        public IEnumerable<object> DirectoryItems => SubDirectories.Cast<object>().Concat(Files);
 
         public DirectoryViewModel(string Path) => _DirectoryInfo = new DirectoryInfo(Path);
     }
