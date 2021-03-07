@@ -164,6 +164,23 @@ namespace CV19.ViewModels
                 Name = $"Имя_{i}",
                 Surname = $"Фамилия_{i}"
             });
+
+        public  DirectoryViewModel DiskRootDir { get; } = new DirectoryViewModel("c:\\");
+
+        #region SelectedDirectory : DirectoryViewModel - Выбранная директория
+
+        /// <summary>Выбранная директория</summary>
+        private DirectoryViewModel _SelectedDirectory;
+
+        /// <summary>Выбранная директория</summary>
+        public DirectoryViewModel SelectedDirectory
+        {
+            get => _SelectedDirectory;
+            set => Set(ref _SelectedDirectory, value);
+        }
+
+        #endregion
+
         /* --------------------------------------------------------------------------------------------------*/
 
 

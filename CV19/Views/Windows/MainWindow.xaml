@@ -42,9 +42,9 @@
         </StatusBar>
         <TabControl>
 
-           <TabItem Header="Тестирование виртуализации" Visibility="Collapsed" >
-               <Grid>
-                   <TextBlock Text="{Binding Source={x:Static l:App.InDesignMode}}"></TextBlock>
+            <TabItem Header="Тестирование виртуализации" Visibility="Collapsed" >
+                <Grid>
+                    <TextBlock Text="{Binding Source={x:Static l:App.InDesignMode}}"></TextBlock>
                     <ListBox HorizontalAlignment="Left" 
                              Width="200" 
                              Margin="20" 
@@ -74,11 +74,11 @@
                                         <TextBlock Text="{Binding Surname}" ToolTip="{Binding Name}"></TextBlock>
                                     </StackPanel>
                                 </Border>
-                           </DataTemplate>
-                       </ListBox.ItemTemplate>
-                   </ListBox>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </Grid>
-           </TabItem>
+            </TabItem>
             <TabItem Header="Студенты" IsSelected="True">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -92,11 +92,11 @@
                                                       x:Name="GroupsCollection"
                                                       Source="{Binding Groups}"
                                                       Filter="GroupsCollectionFilter">
-                                    <CollectionViewSource.GroupDescriptions>
+                                    <!--<CollectionViewSource.GroupDescriptions>
                                         <PropertyGroupDescription PropertyName="Students.Count"/>
-                                    </CollectionViewSource.GroupDescriptions>
+                                    </CollectionViewSource.GroupDescriptions>-->
                                     <CollectionViewSource.SortDescriptions>
-                                        <cm:SortDescription PropertyName="Name" Direction="Descending"/>
+                                        <cm:SortDescription PropertyName="Name" Direction="Ascending"/>
                                     </CollectionViewSource.SortDescriptions>
                                 </CollectionViewSource>
                             </DockPanel.Resources>
@@ -210,8 +210,36 @@
                                     DataFieldY="YValue"/>
                 </oxy:Plot>
             </TabItem>
+            <TabItem Header="Файловая система">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250"></ColumnDefinition>
+                        <ColumnDefinition ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Grid.Column="0" Header="Директории">
 
+                        <TreeView ItemsSource="{Binding DiskRootDir.DirectoryItems}">
+                            <TreeView.ItemTemplate>
+                                <HierarchicalDataTemplate DataType="vm:DirectoryViewModel"
+                                                          ItemsSource="{Binding DirectoryItems}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <fa:ImageAwesome Height="12" Icon="Regular_Folder" Margin="0,0,6,0"></fa:ImageAwesome>
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                    </StackPanel>
 
+                                </HierarchicalDataTemplate>
+                            </TreeView.ItemTemplate>
+                        </TreeView>
+                        <!--<ListBox ItemsSource="{Binding DiskRootDir.DirectoryItems}"
+                                 DisplayMemberPath="Name"
+                                 SelectedItem="{Binding SelectedDirectory}"
+                                 SelectedIndex="0"/>-->
+                    </GroupBox>
+                    <GroupBox Grid.Column="1" Header="Файлы">
+                        <ListBox SelectedItem="{Binding SelectedDirectory.Files, Mode=OneWay}" />
+                    </GroupBox>
+                </Grid>
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>
