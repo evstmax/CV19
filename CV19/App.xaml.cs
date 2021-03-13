@@ -13,5 +13,14 @@ namespace CV19
     /// </summary>
     public partial class App : Application
     {
+
+        public static bool InDesignMode { get; private set; } = true;
+
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            InDesignMode = false;
+            base.OnStartup(e);
+        }
     }
 }
