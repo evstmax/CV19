@@ -3,13 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CV19", "CV19\CV19.csproj", "{BB1DABED-5AE7-4304-9471-2C8417BD66E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CV19", "CV19\CV19.csproj", "{BB1DABED-5AE7-4304-9471-2C8417BD66E3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{274B2432-A6D4-4952-B783-437B80C94488}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CV19Console", "..\Tests\CV19\CV19Console\CV19Console.csproj", "{B3A8D49E-D663-448F-A029-8272BA4277BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CV19Console", "..\Tests\CV19\CV19Console\CV19Console.csproj", "{B3A8D49E-D663-448F-A029-8272BA4277BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CW19WPFTests", "..\Test\CV19\CW19WPFTests\CW19WPFTests.csproj", "{F01CCC02-688A-4238-82D9-1A19AF4803BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CW19WPFTests", "..\Test\CV19\CW19WPFTests\CW19WPFTests.csproj", "{F01CCC02-688A-4238-82D9-1A19AF4803BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6014A1A9-C536-439E-9B7E-A18C0D11C8DB}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

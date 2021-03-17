@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using CV19.Models;
 
 namespace CV19.Services
@@ -19,7 +20,7 @@ namespace CV19.Services
         /// Метод возвращает поток
         /// </summary>
         /// <returns></returns>
-        private static async Task<Stream> GetDataStrem()
+        private static async Task<Stream> GetDataStream()
         {
             var client = new HttpClient(); // 2. сервер ответит
             var response =
@@ -34,7 +35,7 @@ namespace CV19.Services
         /// </summary>
         private static IEnumerable<string> GetDataLines()
         {
-            using var data_steam = GetDataStrem().Result; // 1. произодится запрос к серверу (захватываем поток)
+            using var data_steam =Task.Run(GetDataStream).Result; // 1. произодится запрос к серверу (захватываем поток)
             using var data_reader = new StreamReader(data_steam); // 5. создаем объект для чтения потока байт за байтом
 
             while (!data_reader.EndOfStream)  // 6.пока поток не кончится 
@@ -62,9 +63,18 @@ namespace CV19.Services
             {
                 var province = row[0].Trim();
                 var country_name = row[1].Trim(' ', '"');
-                var latitude = double.Parse(row[2]);
-                var longitude = double.Parse(row[3]);
-                var counts = row.Skip(4).Select(int.Parse).ToArray();
+
+                if (!double.TryParse(row[2], out double latitude)) latitude = 0;
+                if (!double.TryParse(row[3], out double longitude)) longitude = 0;
+                   
+                
+                // var latitude = double.Parse(row[2], CultureInfo.InvariantCulture);
+                  var counts = row.Skip(4).Select(str => 
+                        { int value; 
+                          int.TryParse(str, out value); 
+                          return value;
+                        }).ToArray();
+                //  var counts = row.Skip(4).Select(int.Parse).ToArray();
 
                 yield return (province, country_name, (latitude, longitude),  counts);
             }
@@ -102,10 +112,25 @@ namespace CV19.Services
 
                 foreach (var country_info in data)
                 {
-                    
+                    var country = new CountryInfo()
+                    {
+                        Name = country_info.Key,
+                        ProvinceCounts = country_info.Select(c => new PlaceInfo()
+                            {
+                                Name = c.Province,
+                                Location = new Point(c.Place.Lat, c.Place.Lon),
+                                Counts = dates.Zip(c.Counts, (date,count) => new ConfirmedCount()
+                                {
+                                    Date=date, Count = count
+                                })
+
+                            }
+                        )
+                    };
+                    yield return country;
                 }
         
-            return Enumerable.Empty<CountryInfo>();
+            //return Enumerable.Empty<CountryInfo>();
         }
     }
 }
