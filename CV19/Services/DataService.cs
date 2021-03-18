@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using CV19.Models;
@@ -35,7 +36,8 @@ namespace CV19.Services
         /// </summary>
         private static IEnumerable<string> GetDataLines()
         {
-            using var data_steam =Task.Run(GetDataStream).Result; // 1. произодится запрос к серверу (захватываем поток)
+            //using var data_steam =Task.Run(GetDataStream).Result; // 
+            using var data_steam = (SynchronizationContext.Current is null ? GetDataStream() : Task.Run(GetDataStream)).Result; // 1. произодится запрос к серверу (захватываем поток) и все это в отдельном Потоке
             using var data_reader = new StreamReader(data_steam); // 5. создаем объект для чтения потока байт за байтом
 
             while (!data_reader.EndOfStream)  // 6.пока поток не кончится 
