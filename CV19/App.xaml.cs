@@ -18,12 +18,12 @@ namespace CV19
         public static bool InDesignMode { get; private set; } = true;
 
 
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            InDesignMode = false;
-            base.OnStartup(e);
-            var service_test = new DataService();
-            var countries = service_test.GetData().ToArray();
-        }
+        //protected override void OnStartup(StartupEventArgs e)
+        //{
+        //    InDesignMode = false;
+        //    base.OnStartup(e);
+        //    var service_test = new DataService();
+        //    var countries = service_test.GetData().ToArray();
+        //}
     }
 }
